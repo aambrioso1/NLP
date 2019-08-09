@@ -1,7 +1,7 @@
 """
 This program has two parts:
     
-(1) We define a function that Calculates the Levenshtein Distance recursively. The function lev(word1, word2) computute the distance between word1 and word2.  The algorithm is based on the mathematical definition of the LD found on the Wikipedia page:  https://en.wikipedia.org/wiki/Levenshtein_distance.  This is not an efficient algorithm since the recursion recalculates many distances over and over again.   But it serves as a good exercise in recursion and as a way to better understand the definition.   The Wikipedia article has more information on
+(1) We define a function that calculates the Levenshtein Distance recursively. The function lev(word1, word2) computute the distance between word1 and word2.  The algorithm is based on the mathematical definition of the LD found on the Wikipedia page:  https://en.wikipedia.org/wiki/Levenshtein_distance.  This is not an efficient algorithm since the recursion recalculates many distances over and over again.   But it serves as a good exercise in recursion and as a way to better understand the definition.   The Wikipedia article has information on more efficient algorithms. 
 
 (2) Some data analysis using the LD and short list of words and a panda dataframe.
 
@@ -50,4 +50,5 @@ df = pd.DataFrame(data,index = wordlist, columns = wordlist)
 print(df)
 df['total'] = df.sum()
 print(df)
+
 
