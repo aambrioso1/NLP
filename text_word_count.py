@@ -25,7 +25,7 @@ txt = r1.text[1:] + r2.text[1:] + r3.text[1:] + r4.text[1:]
 # Here we write text to the hard drive
 path = os.getcwd() # Get the current working directory
 path2 = path + '\\my_text.txt' # create a path for new file
-file = open(path2,'w') # open a file to that we will write to.
+file = open(path2,'w') # open a file that we will write to.
 text = file.write(str(r1.text)[1:])
 file.close()
 
