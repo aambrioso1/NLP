@@ -1,7 +1,7 @@
 """
 Written by Ambrioso @ 2020
 A program to count words in text and confirm Zipf's Law.
-Note the program using a module plot.py that must be in the working directory.
+Note the program uses a module plot.py that must be in the working directory.
 """ 
 # Requests is an elegant and simple HTTP library for Python, built for human beings.
 import requests as req
