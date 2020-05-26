@@ -36,12 +36,12 @@ We create a data frame showing all the distance between the words in wordlist.
 import pandas as pd
 wordlist = ['alex', 'anthony', 'sonya', 'erika', 'joseph']
 lev_data = []
-for i in namelist:
+for i in wordlist:
     list1 = []
-    for j in namelist:
+    for j in wordlist:
         list1.append(lev(i,j))
     lev_data.append(list1)
-data = dict(zip(namelist,lev_data))
+data = dict(zip(wordlist,lev_data))
 
 """
 We add a column to the dataframe that shows the total distance of each word in wordlist from all the other words.   This total is a measure of which words are closer to the others (central tendency) and how far apart the words are (variation).
