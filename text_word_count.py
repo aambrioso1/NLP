@@ -17,7 +17,7 @@ r3 = req.get('http://www.gutenberg.org/cache/epub/105/pg105.txt')  # Moby Dick
 # This code uses requests to store big.txt in txt.
 r4 = req.get('https://norvig.com/big.txt')
 
-# Make one long text file.  Note that we are slicing of the first character 
+# Make one long text file.  Note that we are slicing off the first character 
 # text files.  The first character return by the requests is
 # a backslash.   This causes an error when we write a file.   
 txt = r1.text[1:] + r2.text[1:] + r3.text[1:] + r4.text[1:]
