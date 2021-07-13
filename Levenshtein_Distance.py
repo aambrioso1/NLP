@@ -46,6 +46,7 @@ data = dict(zip(wordlist,lev_data))
 """
 We add a column to the dataframe that shows the total distance of each word in wordlist from all the other words.   This total is a measure of which words are closer to the others (central tendency) and how far apart the words are (variation).
 """
+print(f'data: {data}')
 df = pd.DataFrame(data,index = wordlist, columns = wordlist)
 print(df)
 df['total'] = df.sum()

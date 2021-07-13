@@ -1,12 +1,12 @@
 import requests
+#  
 import re
-from collections import Counter
-# import speech as sp  #  This a module in Pythonista
 
+from collections import Counter
 
 text1 = 'http://www.gutenberg.org/cache/epub/5/pg5.txt' # The Constitution
 text2 = 'http://www.gutenberg.org/cache/epub/1112/pg1112.txt' # Romeo and Juliet
-text3 = 'https://www.gutenberg.org/files/158/158-0.txt'
+text3 = 'https://www.gutenberg.org/files/158/158-0.txt' # Emma
 
 r = requests.get(text3)
 txt = r.text

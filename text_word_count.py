@@ -6,7 +6,7 @@ Note the program uses a module plot.py that must be in the working directory.
 # Requests is an elegant and simple HTTP library for Python, built for human beings.
 import requests as req
 import re # Regular expression library.  Part of standard library.
-import collections as col# Standard libary. High-performance container datatypes
+import collections as col # Standard libary. High-performance container datatypes
 import os # Standard library.  Operating system interfaces. 
 import plot # My module for plotting a line graph
 
@@ -41,7 +41,7 @@ NUM = 20
 # The most_common(NUM) methods finds the most common words in text.
 word_count_pairs = col.Counter(word_counts).most_common(NUM)
 
-# Print out top num workds
+# Print out top NUM words
 count_list = []
 print(f'Top {NUM} words in our text.')
 print('*'*35)
