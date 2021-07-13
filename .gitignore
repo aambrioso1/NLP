@@ -1,3 +1,4 @@
 .spyproject
 nltk_env/
 venv
+data_sets/
