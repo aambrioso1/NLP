@@ -1,0 +1,26 @@
+The sentence: "The man ate the hamburger." is NEGATIVE with a score of 0.9138.
+The sentence: "The man ate the salad." is POSITIVE with a score of 0.8384.
+The sentence: "The man ate the cake." is POSITIVE with a score of 0.9850.
+The sentence: "The man ate the yogurt." is NEGATIVE with a score of 0.6592.
+The sentence: "The man ate the beets." is POSITIVE with a score of 0.5928.
+The sentence: "The man ate the red meat." is NEGATIVE with a score of 0.8552.
+The sentence: "The man ate the healthy food." is POSITIVE with a score of 0.9953.
+The sentence: "The man ate the fattening food." is NEGATIVE with a score of 0.8141.
+The sentence: "The man ate the candy." is POSITIVE with a score of 0.9351.
+The sentence: "The man ate the liver." is NEGATIVE with a score of 0.9446.
+The sentence: "The man ate the fruit." is POSITIVE with a score of 0.8958.
+The sentence: "The man ate the insect." is NEGATIVE with a score of 0.9320.
+The sentence: "The man ate the dog." is NEGATIVE with a score of 0.9568.
+The sentence: "The man ate the horse." is NEGATIVE with a score of 0.9491.
+The sentence: "The man ate the man." is NEGATIVE with a score of 0.9469.
+The sentence: "The man ate the monkey." is NEGATIVE with a score of 0.9407.
+The sentence: "The man ate the food high in calories." is POSITIVE with a score of 0.9723.
+The sentence: "The man ate the food low in calories." is NEGATIVE with a score of 0.9982.
+The sentence: "The man ate the meat." is POSITIVE with a score of 0.5427.
+The sentence: "The man ate the brown meat." is NEGATIVE with a score of 0.9167.
+The sentence: "The man ate the chicken." is NEGATIVE with a score of 0.8241.
+The sentence: "The man ate the beef." is POSITIVE with a score of 0.7069.
+The sentence: "The man ate the vegetable pattie." is NEGATIVE with a score of 0.9521.
+The sentence: "The man ate the vegetables." is POSITIVE with a score of 0.9071.
+The sentence: "The man ate the potato." is NEGATIVE with a score of 0.9486.
+The sentence: "The man ate the starchy foods." is POSITIVE with a score of 0.9772.
