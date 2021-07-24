@@ -4,7 +4,7 @@ A respository for my work with transformers.
 
 ## Most important files
 
-### Hugging Face Course :hugging face:
+### Hugging Face Course :hugging_face:
 Currently working on [Hugging Face Course](https://huggingface.co/course/chapter1)
 I am working on Chapter 2 as for 7/24/2021
 
