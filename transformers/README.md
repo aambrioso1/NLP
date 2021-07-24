@@ -6,8 +6,8 @@ A respository for my work with transformers.
 
 ### Hugging Face Course
 
-:hugging_face:
- 
+:rocket:
+
 Currently working on [Hugging Face Course](https://huggingface.co/course/chapter1)
 I am working on Chapter 2 as for 7/24/2021
 
