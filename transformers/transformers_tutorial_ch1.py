@@ -65,8 +65,6 @@ for i in range(SEQ_NUM):
 {41 * '*'}\n\
 {response[i]['generated_text']}")
 
-"""
-
 # Some experiments in grammar.
 # birds sentence: Brown, p. 287
 # skaters sentence: Brown, p. 278
@@ -86,7 +84,7 @@ for text in sentences:
     for i, sentence in enumerate(response):
         print(f"{response[i]['sequence']=}")
 
-"""
+
 for i in range(SEQ_NUM):
     print(f"{response[i]['sequence']}")
 
@@ -94,19 +92,33 @@ for i in range(SEQ_NUM):
 
 #ner = pipeline("ner", model="vblagoje/bert-english-uncased-finetuned-pos", grouped_entities=True)
 # print(ner("My name is Sylvain and I work at Hugging Face in Brooklyn."))
-
+"""
 # Question answering
 
 
 question_answerer = pipeline("question-answering")
 response = question_answerer(
-    question="Where do I work?",
-    context="My name is Sylvain and I work at Hugging Face in Brooklyn"
-)
+    question="What is Bert?",
+    context="""Bidirectional Encoder Representations\
+    from Transformers (BERT) is a transformer-based\
+    machine learning technique for natural language\
+    processing (NLP) pre-training developed by Google.\
+    BERT was created and published in 2018 by Jacob\
+    Devlin and his colleagues from Google.[1][2] As \
+    of 2019, Google has been leveraging BERT to better \
+    understand user searches.[3]\
+    The original English-language BERT has two models:\
+    [1] (1) the BERTBASE: 12 Encoders with 12 bidirectional \
+    self-attention heads, and (2) the BERTLARGE: 24 Encoders \
+    with 16 bidirectional self-attention heads. Both models \
+    are pre-trained from unlabeled data extracted from the\
+    BooksCorpus[4] with 800M words and English Wikipedia\
+    with 2,500M words.[5]
+    """)
 
 print(f'{response=}')
 
-
+"""
 # Summarization
 
 
@@ -143,4 +155,4 @@ translator = pipeline("translation_en_to_es", model="mrm8488/mbart-large-finetun
 response = translator("I am enjoying learning with Hugging Face.")
 """
 
-print(f'{response=}')
+# print(f'{response=}')
