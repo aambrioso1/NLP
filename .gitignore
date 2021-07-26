@@ -2,3 +2,8 @@
 nltk_env/
 venv
 data_sets/
+pytorch_model.bin
+bert/
+data_sets/
+glue_data/
+saved_models/
