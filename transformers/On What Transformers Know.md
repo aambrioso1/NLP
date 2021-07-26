@@ -13,11 +13,11 @@ We propose a new simple network architecture, the Transformer, based solely on a
 [Attention is All You Need](https://arxiv.org/abs/1706.03762)
 
 The usual route with created language models that can do natural language tasks is to:
-- think of a reasonable language task,
-- create a huge database,
-- use the database to fine-tune the model for solving the task,
-- create an improved model by by comparing new models with the previous one.
-
+* pre-tune a model using a large language corpus or two,
+* create reasonable language task,
+* create a huge database involving the language task,
+* use the database to fine-tune a model for solving the task,
+* create an improved model by by comparing new models with the previous one.
 
 ### Language Models are Few Shot Learners
 I was inspired to write this essay/paper by the article Language Models are Few-Shot Learners (July 2020;  https://arxiv.org/abs/2005.14165).  
