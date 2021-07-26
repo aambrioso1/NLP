@@ -3,7 +3,8 @@
 ### What is a transformer?
 
 
-A transformer is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.
+#### From Wikipedia
+A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.
 This led to the development of pretrained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which were trained with large language datasets, such as Wikipedia Corpus and Common Crawl, and can be fine-tuned for specific tasks. 
 
 [BERT](https://arxiv.org/abs/1810.04805) is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications.
@@ -11,26 +12,22 @@ This led to the development of pretrained systems such as BERT (Bidirectional En
 We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.
 [Attention is All You Need](https://arxiv.org/abs/1706.03762)
 
-The usual route with natural language tasks is"
-- think of a reasonable language task
-- create a huge database
-- use the database to fine-tune the model for solving the task
-- improve models by by comparing new models with an the previous one.
+The usual route with created language models that can do natural language tasks is to:
+- think of a reasonable language task,
+- create a huge database,
+- use the database to fine-tune the model for solving the task,
+- create an improved model by by comparing new models with the previous one.
 
 
 ### Language Models are Few Shot Learners
 I was inspired to write this essay/paper by the article Language Models are Few-Shot Learners (July 2020;  https://arxiv.org/abs/2005.14165).  
 
-What the paper shows is that scaling up the a language model can greatly improve performance.   These larger model can be even compete with SOTA fine-tuned models on some NLP tasks.   The bigger models can also learned new tasks with a small number of examples or just text interaction.   This last observation is one I would like to explore.   As you will see from my demostration in the following even small models can responds to text communication and demonstate knowledge beyond what they are fine-tune.   Depending the task the result might be expected or it might be surprise. 
-
-For now, as I do not have a technique for tuning a model I will only use the standard models along with the text input assosiated with the model.
-
-Here is an example of what I mean by demonstating knowledge beyond the pre-tuned models fine-tuned task.
-Example from article of prompt:
+What the paper shows is that scaling up the a language model can greatly improve performance.   These larger model can compete with SOTA fine-tuned models on some NLP tasks WITHOUT fine-tuning.   These large scale models can also learned new tasks with a small number of examples or just text interaction.   This last observation is one I would like to explore.   Here is an example from the article on few shot learners:
 
 
+As you will see from my demonstration, even small models can responds to text communication and demonstate knowledge beyond what they are fine-tune for.   Depending the task the result might be expected, like knowing a history fact, or it might be surprising like being able to do simple arithmetic. 
 
-
+For now, as I have not learned how fine-tuning a model, I will only use the standard models not above along with the text input associated with the model.
 
 ### My Goals
 I have been working recently with transformers using the API available at [Hugging Face](https://huggingface.co/).  I have noticed that transformers can respond to text interaction.   I want to imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher as a questions and a student in the group gives an answer.  But the teachers questions will be in text form and the role of student will be played by a fine-tuned language model.  
