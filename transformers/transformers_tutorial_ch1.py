@@ -95,7 +95,6 @@ for i in range(SEQ_NUM):
 """
 # Question answering
 
-
 question_answerer = pipeline("question-answering")
 response = question_answerer(
     question="What is Bert?",
