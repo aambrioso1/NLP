@@ -1,4 +1,4 @@
-# On What Transformers Can Do
+# On what transformers can do
 
 ### My Goals
 * Define what a transformer is.
