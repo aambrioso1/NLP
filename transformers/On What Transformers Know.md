@@ -22,10 +22,10 @@ From [Attention is All You Need](https://arxiv.org/abs/1706.03762)"
 
 The usual route to created language models that can do natural language tasks is to:
 * pre-tune a model using a large language corpus or two,
-* create reasonable language task,
+* create a reasonable language task,
 * create a huge database involving the language task,
-* use the database to fine-tune a model for solving the task,
-* create an improved model modifying the previous one.
+* use the database to fine-tune the model for solving the task,
+* create an improved model by modifying the previous one.
 
 As you will see from my demonstration, even small models can responds to text communication and demonstrate knowledge beyond what they are fine-tune for.   Depending the task the result might be expected, like knowing a history fact, or it might be surprising like being able to do simple arithmetic. 
 
