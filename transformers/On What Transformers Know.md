@@ -8,7 +8,7 @@
 
 I have been working recently with transformers using the API available at [Hugging Face (HG)](https://huggingface.co/).  I have noticed that transformers can "respond" to text interaction.  I was also motivated by the article [Language Models are Few-Shot Learners, July 2020](  https://arxiv.org/abs/2005.14165) and the idea of a zero-shot learning task.  What the paper shows is that scaling up a language model can greatly improve performance.   These larger model can compete with SOTA fine-tuned models on some NLP tasks WITHOUT fine-tuning.   These large scale models can also learned new tasks with a small number of examples or just text interaction.   Here is an example from the article on few shot learners: 
 
-### What is a transformer?
+### What is a transformer from Wikipedia?
 "A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.  This led to the development of pretrained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which were trained with large language datasets, such as Wikipedia Corpus and Common Crawl, and can be fine-tuned for specific tasks."
 
 ### From original paper on BERT
