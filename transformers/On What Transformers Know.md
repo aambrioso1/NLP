@@ -3,7 +3,7 @@
 ### My Goals
 * Define what a transformer is.
 * Record references of the important papers introducing transformers.
-* Demonstrate some zero-shot task that a language model running on a typical computer can do.
+* Demonstrate some zero-shot tasks that a language model running on a typical computer can do.
 * To become more familiar with the Hugging Face (HG) API.
 
 I have been working recently with transformers using the API available at [Hugging Face (HG)](https://huggingface.co/).  I have noticed that transformers can "respond" to text interaction.  I was also motivated by the article [Language Models are Few-Shot Learners, July 2020](  https://arxiv.org/abs/2005.14165) and the idea of a zero-shot learning task.  What the paper shows is that scaling up a language model can greatly improve performance.   These larger model can compete with SOTA fine-tuned models on some NLP tasks WITHOUT fine-tuning.   These large scale models can also learned new tasks with a small number of examples or just text interaction.   Here is an example from the article on few shot learners: 
