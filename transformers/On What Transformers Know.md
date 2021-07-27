@@ -111,20 +111,20 @@ for i, text in enumerate(sentences, 1):
 """
 Output:  fine-tuned task: fill-mask
 Knowledge tested
-[1]  Grammar: subject/verb agreement
-[2]  Grammar: subject/verb agreement
-[5]  History fact
-[8]  Spelling
-[11] - [17]  Simple arthmetic
-[18] Content reflection/logic
-[19], [20]  Color mixing facts
+* [1]  Grammar: subject/verb agreement
+* [2]  Grammar: subject/verb agreement
+* [5]  History fact
+* [8]  Spelling
+* [11] - [17]  Simple arthmetic
+* [18] Content reflection/logic
+* [19], [20]  Color mixing facts
 ******************************
 [1] The man and woman run.  The boy <mask> too.
-(1) The man and woman run.  The boy runs too.
-(2) The man and woman run.  The boy cries too.
-(3) The man and woman run.  The boy run too.
-(4) The man and woman run.  The boy goes too.
-(5) The man and woman run.  The boy dies too.
+* (1) The man and woman run.  The boy runs too.
+* (2) The man and woman run.  The boy cries too.
+* (3) The man and woman run.  The boy run too.
+* (4) The man and woman run.  The boy goes too.
+* (5) The man and woman run.  The boy dies too.
 ******************************
 [2] The man and woman run.  The girls <mask> too.
 (1) The man and woman run.  The girls run too.
