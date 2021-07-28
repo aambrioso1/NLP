@@ -10,7 +10,7 @@ I have been working recently with transformers using the API available at [Huggi
 
 “Q: What is 48 plus 76? A: 124.” 
 
-### What is a transformer from Wikipedia?
+### From Wikipeda: What is a transformer?
 "A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.  This led to the development of pretrained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which were trained with large language datasets, such as Wikipedia Corpus and Common Crawl, and can be fine-tuned for specific tasks."
 
 ### From original paper on BERT
@@ -20,20 +20,20 @@ I have been working recently with transformers using the API available at [Huggi
 "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
 From [Attention is All You Need](https://arxiv.org/abs/1706.03762)"
 
-The usual route to created language models that can do natural language tasks is to:
+The usual route to creating language models that can do natural language tasks is to:
 * pre-tune a model using a large language corpus or two,
 * create a reasonable language task,
 * create a huge database involving the language task,
 * use the database to fine-tune the model for solving the task,
 * create an improved model by modifying the previous one.
 
-As you will see from my demonstration, even small models can responds to text communication and demonstrate knowledge beyond what they are fine-tune for.   Depending the task the result might be expected, like knowing a history fact, or it might be surprising like being able to do simple arithmetic. 
+As you will see from my demonstration, even small models can responds to text communication and demonstrate knowledge beyond what they are fine-tune for.   Depending on the task, the result might be expected, like knowing a history fact, or it might be surprising like being able to do simple arithmetic. 
 
-For now, as I have not learned how fine-tuning a model, I will use the default models used by the HG API along with the text input associated with each model.
+For now, as I have not learned how train or fine-tuning a model, I will use the default models in the HG API along with the text input associated with each model.
 
-Use this question answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and whether models pre-tuned to different tasks behave differently.   
+Using a question/answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and how models pre-tuned to different tasks behave differently.   
 
-In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to a task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in text form and the role of student will be played by a fine-tuned language model.  The student will also respond with text.  
+In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to the task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in text form as required by the model.   The role of student will be played by a fine-tuned language model.  The student will also respond with text.  
 
 Here are some examples.  Assume we are using a model trained for the fill-mask task, will the model be able to fill in the following?
 
@@ -43,7 +43,7 @@ Here are some examples.  Assume we are using a model trained for the fill-mask t
 * The president of the United States in 2010/2018/now is <mask> (History fact, current events)
 * The word freind is misspelled.   The correct spelling of this word is <mask>. (spelling)
 
-It should be noted that the probing here is helped in several of the examples by using an initial sentence that prompts the response.
+It should be noted that the probing here is helped in two of the examples by using an initial sentence that prompts the response.
 
 I would like to explore this sort of general knowledge with a representative subset of models fined-tuned for various tasks.   For now I will use default models provided through the pipeline method, [transformers.pipeline(task_string)](https://huggingface.co/transformers/main_classes/pipelines.html#transformers.pipeline), which accepts the following tasks:
 
@@ -63,7 +63,7 @@ Note that my goal is not to demonstrate the pre-tuned language tasks but rather 
 
 Ultimately I would like to get a better understanding of:
 * what transformers "know" and don't "know".
-* why they "know" or don't "know".   
+* why they "know" or don't "know" what they "know" or "don't know."   
 * what might be possible for them to "know" without significant changes to the architecture except unrestricting scaling and better datasets. 
 
 ### Initial exploration
@@ -74,7 +74,7 @@ Ultimately I would like to get a better understanding of:
 
 	from transformers import pipeline
 
-	SEQ_NUM = 5 # number of response per task
+	SEQ_NUM = 5 # number of responses per task
 	NUM = 30 # number of asterisks to print
 
 	# Some experiments in grammar.
