@@ -13,12 +13,12 @@ I have been working recently with transformers using the API available at [Huggi
 ### From Wikipedia: What is a transformer?
 "A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.  This led to the development of pretrained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which were trained with large language datasets, such as Wikipedia Corpus and Common Crawl, and can be fine-tuned for specific tasks."
 
-### From original paper on BERT
-[BERT](https://arxiv.org/abs/1810.04805) is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications.
-
 ### From the original paper introducing transformers
 "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
 From [Attention is All You Need](https://arxiv.org/abs/1706.03762)"
+
+### From original paper on BERT
+[BERT](https://arxiv.org/abs/1810.04805) is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications.
 
 The usual route to creating language models that can do natural language tasks is to:
 * pre-tune a model using a large language corpus or two,
