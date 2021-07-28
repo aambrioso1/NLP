@@ -29,7 +29,7 @@ The usual route to creating language models that can do natural language tasks i
 
 As you will see from my demonstration, even small models can responds to text communication and demonstrate knowledge beyond what they are fine-tune for.   Depending on the task, the result might be expected, like knowing a history fact, or it might be surprising like being able to do simple arithmetic. 
 
-For now, as I have not learned how train or fine-tuning a model, I will use the default models in the HG API along with the text input associated with each model.
+For now, since I have not learned how train or fine-tune a model, I will use the default models in the HG API along with the text input associated with each model.
 
 Using a question/answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and how models pre-tuned to different tasks behave differently.   
 
