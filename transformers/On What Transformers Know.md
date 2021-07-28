@@ -33,19 +33,19 @@ For now, as I have not learned how fine-tuning a model, I will use the default m
 
 Use this question answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and whether models pre-tuned to different tasks behave differently.   
 
-In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to a task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.
+In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to a task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in text form and the role of student will be played by a fine-tuned language model.  The student will also respond with text.  
 
 Here are some examples.  Assume we are using a model trained for the fill-mask task, will the model be able to fill in the following?
 
-The Emancipation Proclamation was proclaimed by <mask>. (History fact)
-Adding five and four results in <mask>. (Simple arithmetic)
-The boy likes to run.   Yesterday he <mask>. (basic grammar)
-The president of the United States in 2010/2018/now is <mask> (History fact, current events)
-The word freind is misspelled.   The correct spelling of this word is <mask>. (spelling)
+* The Emancipation Proclamation was proclaimed by <mask>. (History fact)
+* Adding five and four results in <mask>. (Simple arithmetic)
+* The boy likes to run.   Yesterday he <mask>. (basic grammar)
+* The president of the United States in 2010/2018/now is <mask> (History fact, current events)
+* The word freind is misspelled.   The correct spelling of this word is <mask>. (spelling)
 
-It should be noted that the probing here is helped in several of the examples by using an initial sentence to prompt the response.
+It should be noted that the probing here is helped in several of the examples by using an initial sentence that prompts the response.
 
-I would like to explore this sort of general knowledge with a good, representative subset of models fined-tuned for various tasks.   For now I will use default models provided through the pipeline method, [transformers.pipeline(task_string)](https://huggingface.co/transformers/main_classes/pipelines.html#transformers.pipeline), which accepts the following tasks:
+I would like to explore this sort of general knowledge with a representative subset of models fined-tuned for various tasks.   For now I will use default models provided through the pipeline method, [transformers.pipeline(task_string)](https://huggingface.co/transformers/main_classes/pipelines.html#transformers.pipeline), which accepts the following tasks:
 
 * "feature-extraction"
 * "text-classification"
@@ -59,11 +59,11 @@ I would like to explore this sort of general knowledge with a good, representati
 * "zero-shot-classification"
 * "conversational"
 
-Note that my goal is not to demonstrate the pre-tuned language tasks but rather to explore the general knowledge of the fine-tuned models and their ability to "understand" prompts.   Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher as a questions and a student in the group gives an answer.  But the teachers questions will be in text form and the role of student will be played by a fine-tuned language model.   
+Note that my goal is not to demonstrate the pre-tuned language tasks but rather to explore the general knowledge of the fine-tuned models and their ability to "understand" prompts. 
 
-Ultimately my goal to get a better understanding of:
+Ultimately I would like to get a better understanding of:
 * what transformers "know" and don't "know".
-* why they "know" or don't "know" these things.   
+* why they "know" or don't "know".   
 * what might be possible for them to "know" without significant changes to the architecture except unrestricting scaling and better datasets. 
 
 ### Initial exploration
