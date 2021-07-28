@@ -10,7 +10,7 @@ I have been working recently with transformers using the API available at [Huggi
 
 “Q: What is 48 plus 76? A: 124.” 
 
-### From Wikipeda: What is a transformer?
+### From Wikipedia: What is a transformer?
 "A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a deep learning model that adopts the mechanism of attention, differentially weighing the significance of each part of the input data.  This led to the development of pretrained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which were trained with large language datasets, such as Wikipedia Corpus and Common Crawl, and can be fine-tuned for specific tasks."
 
 ### From original paper on BERT
