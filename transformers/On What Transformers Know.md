@@ -64,7 +64,12 @@ Note that my goal is not to demonstrate the pre-tuned language tasks but rather 
 Ultimately I would like to get a better understanding of:
 * what transformers "know" and don't "know".
 * why they "know" or don't "know" what they "know" or "don't know."   
-* what might be possible for them to "know" without significant changes to the architecture except unrestricting scaling and better datasets. 
+* what might be possible for them to "know" without significant changes to the architecture except unrestricting scaling and better datasets.
+
+Interesting work on perplexity, syntactic generalization(SG) and applying SG:
+https://aclanthology.org/2020.acl-main.158.pdf
+https://aclanthology.org/2021.acl-long.289.pdf
+
 
 ### Initial exploration
 
