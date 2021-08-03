@@ -6,7 +6,7 @@
 * Demonstrate some zero-shot tasks that a language model running on a typical computer can do.
 * To become more familiar with the Hugging Face (HG) API.
 
-I have been working recently with transformers using the API available at [Hugging Face (HG)](https://huggingface.co/).  I have noticed that transformers can "respond" to text interaction.  I was also motivated by the article [Language Models are Few-Shot Learners, July 2020](  https://arxiv.org/abs/2005.14165) and the idea of a zero-shot learning task.  What the paper shows is that scaling up a language model can greatly improve performance.   These larger model can compete with SOTA fine-tuned models on some NLP tasks WITHOUT fine-tuning.   These large scale models can also learned new tasks with a small number of examples or just text interaction.   Here is an example from the article on few shot learners:
+I have been working recently with transformers using the API available at [Hugging Face (HG)](https://huggingface.co/).  I have noticed that transformers can "respond" to text interaction.  I was also motivated by the article [Language Models are Few-Shot Learners, July 2020](https://arxiv.org/abs/2005.14165) and the idea of a zero-shot learning task.  What the paper shows is that scaling up a language model can greatly improve performance.   These larger model can compete with SOTA fine-tuned models on some NLP tasks WITHOUT fine-tuning.   These large scale models can also learned new tasks with a small number of examples or just text interaction.   Here is an example from the article on few shot learners:
 
 “Q: What is 48 plus 76? A: 124.” 
 
@@ -33,7 +33,7 @@ For now, since I have not learned how train or fine-tune a model, I will use the
 
 Using a question/answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and how models pre-tuned to different tasks behave differently.   
 
-In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to the task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in text form as required by the model.   The role of student will be played by a fine-tuned language model.  The student will also respond with text.  
+In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to the task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in the text form required by the model.   The role of student will be played by a fine-tuned language model.  The student will also respond with text.  
 
 Here are some examples.  Assume we are using a model trained for the fill-mask task, will the model be able to fill in the following?
 
@@ -75,11 +75,11 @@ Ultimately I would like to get a better understanding of:
 	from transformers import pipeline
 
 	SEQ_NUM = 5 # number of responses per task
-	NUM = 30 # number of asterisks to print
+	NUM = 30 # number of asterisks to print for section separator
 
 	# Some experiments in grammar.
 	# birds sentence: Brown, p. 287
-	# skaters sentence: Brown, p. 278
+	
 	sentences = ["The man and woman run.  The boy <mask> too.",\
 	  "The man and woman run.  The girls <mask> too.",\
 	  "If it <mask> me, I would do things differently.",\
@@ -102,7 +102,10 @@ Ultimately I would like to get a better understanding of:
 	  "The color of the raincoat is <mask>.",\
 	  ]
 
-	unmasker = pipeline("fill-mask")
+    models = ["bert-base-uncased", "bert-large-uncased", roberta-base", "roberta-large"] 
+	
+    # for model in models: To be added after testing.
+	unmasker = pipeline("fill-mask", model=models[0])
 	for i, text in enumerate(sentences, 1):
 	    response = unmasker(text, top_k=SEQ_NUM)
 	    print(NUM * '*')
@@ -113,8 +116,7 @@ Ultimately I would like to get a better understanding of:
 	"""
 	Output:  fine-tuned task: fill-mask
 	Knowledge tested
-	* [1]  Grammar: subject/verb agreement
-	* [2]  Grammar: subject/verb agreement
+	* [1] - [3]  Grammar
 	* [5]  History fact
 	* [8]  Spelling
 	* [11] - [17]  Simple arthmetic
