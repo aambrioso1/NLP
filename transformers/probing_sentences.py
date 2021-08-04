@@ -1,7 +1,7 @@
 # probing_sentences.py
 
 """
-A collection of list of sentences for different categories of investigation
+A collection of list of sentences for different categories of my investigation
 For now all sentences are structured around the fill-mask task.
 """
 
