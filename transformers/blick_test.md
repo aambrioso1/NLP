@@ -2,6 +2,8 @@
 
 ## Bert
 
+The differences are interesting especially for [16].
+
 Blicks of 5 is 6. Blicks of 6 is 7. Blicks of 7 is [MASK].
 ***********************************
 [13] Blicks of 5 is 6. Blicks of 6 is 7. Blicks of 7 is [MASK].
