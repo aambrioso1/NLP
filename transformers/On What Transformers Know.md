@@ -31,7 +31,7 @@ As you will see from my demonstration, even small models can responds to text co
 
 For now, since I have not learned how train or fine-tune a model, I will use the default models in the HG API along with the text input associated with each model.
 
-Using a question/answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their pre-tuned tasks and how models pre-tuned to different tasks behave differently.   
+Using a question/answer approach, I explore what smaller scale models from the Hugging Face Library can do apart from their fined-tuned tasks and how models pre-tuned to different tasks behave differently.   
 
 In simpler, but imprecise language, I explore a variety of tasks to see what a transformer, fine-tuned for one of the usual tasks, "knows".   By "know" here I mean that the transformer's response to the task is the same as we might expect from a student who knows the appropriate response.  Perhaps a more precised definition is that **I am looking for what zero-shot tasks can be found in small models**.  Imagine that a teacher is probing the general knowlege of a group of students with short text prompts.  The teacher asks questions and a student in the group gives an answer.  For my experiments the teacher's questions will be in the text form required by the model.   The role of student will be played by a fine-tuned language model.  The student will also respond with text.  
 
@@ -59,7 +59,7 @@ I would like to explore this sort of general knowledge with a representative sub
 * "zero-shot-classification"
 * "conversational"
 
-Note that my goal is not to demonstrate the pre-tuned language tasks but rather to explore the general knowledge of the fine-tuned models and their ability to "understand" prompts. 
+Note that my goal is not to demonstrate the language tasks but rather to explore the general knowledge of the fine-tuned models and their ability to "understand" prompts. 
 
 Ultimately I would like to get a better understanding of:
 * what transformers "know" and don't "know".
