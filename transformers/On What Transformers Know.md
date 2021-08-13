@@ -268,3 +268,7 @@ https://aclanthology.org/2021.acl-long.289.pdf
 	* (4) The color of the raincoat is orange.
 	* (5) The color of the raincoat is muted.
 	"""
+
+Just discovered this paper: 
+
+[A Primer in BERTology:  What We Know About How BERT works](https://aclanthology.org/2020.tacl-1.54.pdf)

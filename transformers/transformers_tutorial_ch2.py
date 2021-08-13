@@ -47,11 +47,12 @@ predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
 print(predictions)
 
 print(model.config.id2label)
-"""
+
 
 # Models:  https://huggingface.co/course/chapter2/3?fw=pt
 
 # Initialize a Bert model
+
 
 from transformers import BertConfig, BertModel, BertTokenizer, AutoTokenizer
 
@@ -64,7 +65,7 @@ model = BertModel(config) # This will create a random model
 print(f'The BertModel config:\n{config}')
 
 
-"""
+
 The BertModel config:
 BertConfig {
   "attention_probs_dropout_prob": 0.1,
@@ -86,7 +87,7 @@ BertConfig {
   "use_cache": true,
   "vocab_size": 30522
 }
-"""
+
 
 # To avoid the effort of training a model, we can use a pre-trained model
 
@@ -95,12 +96,12 @@ model = BertModel.from_pretrained("bert-base-cased")
 # It is convenient to use Automodel since then the code will be checkpoint-agnostic.
 # The model will be pre-trained for the appropriate task.
 
-"""
+
 pre-trained models are cached in the cache folder: ~/.cache/huggingface/transformers
 This folder can be customized by setting the HF_HOME environment variable.
 
 List of Bert checkpoints:  https://huggingface.co/models?filter=bert
-"""
+
 
 # Saving a model
 
@@ -130,7 +131,7 @@ model_inputs = torch.tensor(encoded_sequences)
 output = model(model_inputs)
 
 
-"""
+
 from transformers import BertTokenizer, BertModel
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained("bert-base-uncased")
@@ -138,7 +139,7 @@ text = "Replace me by any text you'd like."
 encoded_input = tokenizer(text, return_tensors='pt')
 output = model(**encoded_input)
 print(output)
-"""
+
 
 # Tokenizers: https://huggingface.co/course/chapter2/4?fw=pt 
 
@@ -147,7 +148,7 @@ print(tokenized_text)
 
 # ['Jim', 'Henson', 'was', 'a', 'puppeteer']
 
-"""
+
 Two possible ways to tokenize text: (1)  word-base (2) character-based 
 
 Another way
@@ -160,7 +161,7 @@ Other possibilites:
 * WordPiece - BERT
 * SentencePiece or Unigram - several multilingual models
 
-"""
+
 
 tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
 token_dict = tokenizer("Using a Transformer network is simple")
@@ -171,11 +172,11 @@ tokenizer.save_pretrained(dir)
 
 # Encoding:  On this page - https://huggingface.co/course/chapter2/4?fw=pt
 
-"""
+
 Encoding is a two-step process:
 (1)  tokenization
 (2)  convert to input IDs
-"""
+
 
 # Tokenization
 
@@ -213,4 +214,33 @@ def decode(list):
 
 decode([  101,  7993,   170, 13809, 23763,  2443,  1110,  3014,   102])
 decode([100, 1000, 10000])
+"""
+# Section 2.5 Handling Multiple Sequences
+
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+
+sequence = "I've been waiting for a HuggingFace course my whole life."
+
+tokens = tokenizer.tokenize(sequence)
+ids = tokenizer.convert_tokens_to_ids(tokens)
+
+input_ids1 = torch.tensor([ids])
+print("Input IDs:", input_ids1)
+
+output1 = model(input_ids1)
+print("Logits:", output1.logits)
+
+input_ids2 = torch.tensor([ids, ids])
+print("Input IDs:", input_ids2)
+
+output2 = model(input_ids2)
+print("Logits:", output2.logits)
+
+# Start on this page:  https://huggingface.co/course/chapter2/5?fw=pt
+# Section:  Padding Inputs
 
