@@ -271,4 +271,6 @@ https://aclanthology.org/2021.acl-long.289.pdf
 
 Just discovered this paper: 
 
-[A Primer in BERTology:  What We Know About How BERT works](https://aclanthology.org/2020.tacl-1.54.pdf)
+[A Primer in BERTology:  What We Know About How BERT works](https://aclanthology.org/2020.tacl-1.54.pdf).
+
+Also relevant is [When You Need Billions of Words of Pretraining Data?](https://aclanthology.org/2021.acl-long.90.pdf).
