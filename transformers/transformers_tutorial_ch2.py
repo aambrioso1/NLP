@@ -351,8 +351,37 @@ There are others.
 sequence = sequence[:max_sequence_length]
 """
 
-# Start here: https://huggingface.co/transformers/model_doc/led.html
+# Start here: https://huggingface.co/course/chapter2/6?fw=pt
 
 # Putting it all together
 
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+sequences = [
+  "I've been waiting for a HuggingFace course my whole life.",
+  "So have I!"
+]
+
+# We can input a list of sequence, pad, truncate, control the framework.
+
+# "pt" returns PyTorch tensors 
+# "tf" returns TensorFlow tensors
+# "np" returns NumPy arrays
+
+tokens = tokenizer(sequences, padding=True, truncation=True, return_tensors="pt")
+output = model(**tokens)
+
+print(f"Logits: {output.logits}")
+print(f"Labels: {model.config.id2label}")
+
+
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+result = tokenizer.tokenize("Hello!")
+print(f"Result:  {result}")
 
