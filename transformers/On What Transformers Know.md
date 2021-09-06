@@ -20,6 +20,8 @@ From [Attention is All You Need](https://arxiv.org/abs/1706.03762)"
 ### From original paper on BERT
 [BERT](https://arxiv.org/abs/1810.04805) is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications.
 
+### [Article explaining BERT](https://datasciencetoday.net/index.php/en-us/nlp/211-paper-dissected-bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding-explained)
+
 The usual route to creating language models that can do natural language tasks is to:
 * pre-tune a model using a large language corpus or two,
 * create a reasonable language task,
