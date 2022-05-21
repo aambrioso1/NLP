@@ -1,0 +1,405 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "authorship_tag": "ABX9TyMvKRqU4R73pKtH/cVzJbtc",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/aambrioso1/NLP/blob/master/Annotated_Transformer_Clone\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "8Wmp_mzvcLdm"
+      },
+      "outputs": [],
+      "source": [
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "A Clone with Notes of the [Annotated Transformer](http://nlp.seas.harvard.edu/annotated-transformer/)\n",
+        "Alex Ambrioso April 2022"
+      ],
+      "metadata": {
+        "id": "0mlI5_rfcNMY"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install -q torchdata==0.3.0 torchtext==0.12 spacy==3.2 altair GPUtil\n",
+        "!python -m spacy download de_core_news_sm\n",
+        "!python -m spacy download en_core_web_sm"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "I2mv5V6ucgRH",
+        "outputId": "deed1808-bdd3-4bde-a5a5-de8f0986d0e0"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting de-core-news-sm==3.2.0\n",
+            "  Downloading https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.2.0/de_core_news_sm-3.2.0-py3-none-any.whl (19.1 MB)\n",
+            "\u001b[K     |████████████████████████████████| 19.1 MB 1.2 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: spacy<3.3.0,>=3.2.0 in /usr/local/lib/python3.7/dist-packages (from de-core-news-sm==3.2.0) (3.2.0)\n",
+            "Requirement already satisfied: pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (1.8.2)\n",
+            "Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.0.6)\n",
+            "Requirement already satisfied: setuptools in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (57.4.0)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (21.3)\n",
+            "Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.0.6)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.11.3)\n",
+            "Requirement already satisfied: spacy-legacy<3.1.0,>=3.0.8 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.0.9)\n",
+            "Requirement already satisfied: spacy-loggers<2.0.0,>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (1.0.2)\n",
+            "Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (1.0.7)\n",
+            "Requirement already satisfied: numpy>=1.15.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (1.21.6)\n",
+            "Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (4.64.0)\n",
+            "Requirement already satisfied: thinc<8.1.0,>=8.0.12 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (8.0.16)\n",
+            "Requirement already satisfied: catalogue<2.1.0,>=2.0.6 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.0.7)\n",
+            "Requirement already satisfied: langcodes<4.0.0,>=3.2.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.3.0)\n",
+            "Requirement already satisfied: srsly<3.0.0,>=2.4.1 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.4.3)\n",
+            "Requirement already satisfied: wasabi<1.1.0,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (0.9.1)\n",
+            "Requirement already satisfied: typer<0.5.0,>=0.3.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (0.4.1)\n",
+            "Requirement already satisfied: requests<3.0.0,>=2.13.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.23.0)\n",
+            "Requirement already satisfied: pathy>=0.3.5 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (0.6.1)\n",
+            "Requirement already satisfied: blis<0.8.0,>=0.4.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (0.4.1)\n",
+            "Requirement already satisfied: typing-extensions<4.0.0.0,>=3.7.4 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.10.0.2)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from catalogue<2.1.0,>=2.0.6->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.8.0)\n",
+            "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging>=20.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.0.9)\n",
+            "Requirement already satisfied: smart-open<6.0.0,>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from pathy>=0.3.5->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (5.2.1)\n",
+            "Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (3.0.4)\n",
+            "Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.10)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2021.10.8)\n",
+            "Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (1.25.11)\n",
+            "Requirement already satisfied: click<9.0.0,>=7.1.1 in /usr/local/lib/python3.7/dist-packages (from typer<0.5.0,>=0.3.0->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (7.1.2)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2->spacy<3.3.0,>=3.2.0->de-core-news-sm==3.2.0) (2.0.1)\n",
+            "\u001b[38;5;2m✔ Download and installation successful\u001b[0m\n",
+            "You can now load the package via spacy.load('de_core_news_sm')\n",
+            "Collecting en-core-web-sm==3.2.0\n",
+            "  Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl (13.9 MB)\n",
+            "\u001b[K     |████████████████████████████████| 13.9 MB 7.0 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: spacy<3.3.0,>=3.2.0 in /usr/local/lib/python3.7/dist-packages (from en-core-web-sm==3.2.0) (3.2.0)\n",
+            "Requirement already satisfied: spacy-loggers<2.0.0,>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.0.2)\n",
+            "Requirement already satisfied: spacy-legacy<3.1.0,>=3.0.8 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.9)\n",
+            "Requirement already satisfied: typing-extensions<4.0.0.0,>=3.7.4 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.10.0.2)\n",
+            "Requirement already satisfied: langcodes<4.0.0,>=3.2.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.3.0)\n",
+            "Requirement already satisfied: typer<0.5.0,>=0.3.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.4.1)\n",
+            "Requirement already satisfied: requests<3.0.0,>=2.13.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.23.0)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (21.3)\n",
+            "Requirement already satisfied: srsly<3.0.0,>=2.4.1 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.4.3)\n",
+            "Requirement already satisfied: setuptools in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (57.4.0)\n",
+            "Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (4.64.0)\n",
+            "Requirement already satisfied: wasabi<1.1.0,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.9.1)\n",
+            "Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.0.6)\n",
+            "Requirement already satisfied: catalogue<2.1.0,>=2.0.6 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.0.7)\n",
+            "Requirement already satisfied: blis<0.8.0,>=0.4.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.4.1)\n",
+            "Requirement already satisfied: pathy>=0.3.5 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.6.1)\n",
+            "Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.0.7)\n",
+            "Requirement already satisfied: pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.8.2)\n",
+            "Requirement already satisfied: numpy>=1.15.0 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.21.6)\n",
+            "Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.6)\n",
+            "Requirement already satisfied: thinc<8.1.0,>=8.0.12 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (8.0.16)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.7/dist-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.11.3)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from catalogue<2.1.0,>=2.0.6->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.8.0)\n",
+            "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging>=20.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.9)\n",
+            "Requirement already satisfied: smart-open<6.0.0,>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from pathy>=0.3.5->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (5.2.1)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2021.10.8)\n",
+            "Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.4)\n",
+            "Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.10)\n",
+            "Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.25.11)\n",
+            "Requirement already satisfied: click<9.0.0,>=7.1.1 in /usr/local/lib/python3.7/dist-packages (from typer<0.5.0,>=0.3.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (7.1.2)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.0.1)\n",
+            "\u001b[38;5;2m✔ Download and installation successful\u001b[0m\n",
+            "You can now load the package via spacy.load('en_core_web_sm')\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install folium==0.2.1\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "N8w6OLGSc2Hb",
+        "outputId": "9cc272ad-1cad-44b2-834d-823e96e314cd"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting folium==0.2.1\n",
+            "  Downloading folium-0.2.1.tar.gz (69 kB)\n",
+            "\u001b[?25l\r\u001b[K     |████▊                           | 10 kB 18.1 MB/s eta 0:00:01\r\u001b[K     |█████████▍                      | 20 kB 13.1 MB/s eta 0:00:01\r\u001b[K     |██████████████                  | 30 kB 9.7 MB/s eta 0:00:01\r\u001b[K     |██████████████████▊             | 40 kB 8.7 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▍        | 51 kB 6.4 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████    | 61 kB 7.5 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████████| 69 kB 4.4 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: Jinja2 in /usr/local/lib/python3.7/dist-packages (from folium==0.2.1) (2.11.3)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from Jinja2->folium==0.2.1) (2.0.1)\n",
+            "Building wheels for collected packages: folium\n",
+            "  Building wheel for folium (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for folium: filename=folium-0.2.1-py3-none-any.whl size=79808 sha256=c56a5481a9c92e4683ef3959814101ea8306df7dcd4b5c89b23ec7b6cd96b425\n",
+            "  Stored in directory: /root/.cache/pip/wheels/9a/f0/3a/3f79a6914ff5affaf50cabad60c9f4d565283283c97f0bdccf\n",
+            "Successfully built folium\n",
+            "Installing collected packages: folium\n",
+            "  Attempting uninstall: folium\n",
+            "    Found existing installation: folium 0.8.3\n",
+            "    Uninstalling folium-0.8.3:\n",
+            "      Successfully uninstalled folium-0.8.3\n",
+            "Successfully installed folium-0.2.1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "from os.path import exists\n",
+        "import torch\n",
+        "import torch.nn as nn\n",
+        "from torch.nn.functional import log_softmax, pad\n",
+        "## See: https://pytorch.org/docs/stable/generated/torch.nn.Linear.html\n",
+        "# See: https://pytorch.org/docs/stable/generated/torch.nn.functional.pad.html\n",
+        "import math\n",
+        "import copy\n",
+        "import time\n",
+        "from torch.optim.lr_scheduler import LambdaLR\n",
+        "import pandas as pd\n",
+        "import altair as alt\n",
+        "from torchtext.data.functional import to_map_style_dataset\n",
+        "from torch.utils.data import DataLoader\n",
+        "from torchtext.vocab import build_vocab_from_iterator\n",
+        "import torchtext.datasets as datasets\n",
+        "import spacy\n",
+        "import GPUtil\n",
+        "import warnings\n",
+        "from torch.utils.data.distributed import DistributedSampler\n",
+        "import torch.distributed as dist\n",
+        "import torch.multiprocessing as mp\n",
+        "from torch.nn.parallel import DistributedDataParallel as DDP\n",
+        "\n",
+        "\n",
+        "# Set to False to skip notebook execution (e.g. for debugging)\n",
+        "warnings.filterwarnings(\"ignore\")\n",
+        "RUN_EXAMPLES = True"
+      ],
+      "metadata": {
+        "id": "tTWWeP35dXNh"
+      },
+      "execution_count": 11,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Some convenience helper functions used throughout the notebook\n",
+        "\n",
+        "\n",
+        "def is_interactive_notebook():\n",
+        "    return __name__ == \"__main__\"\n",
+        "\n",
+        "\n",
+        "def show_example(fn, args=[]):\n",
+        "    if __name__ == \"__main__\" and RUN_EXAMPLES:\n",
+        "        return fn(*args)\n",
+        "\n",
+        "\n",
+        "def execute_example(fn, args=[]):\n",
+        "    if __name__ == \"__main__\" and RUN_EXAMPLES:\n",
+        "        fn(*args)\n",
+        "\n",
+        "\n",
+        "class DummyOptimizer(torch.optim.Optimizer):\n",
+        "    def __init__(self):\n",
+        "        self.param_groups = [{\"lr\": 0}]\n",
+        "        None\n",
+        "\n",
+        "    def step(self):\n",
+        "        None\n",
+        "\n",
+        "    def zero_grad(self, set_to_none=False):\n",
+        "        None\n",
+        "\n",
+        "\n",
+        "class DummyScheduler:\n",
+        "    def step(self):\n",
+        "        None"
+      ],
+      "metadata": {
+        "id": "NFp45u0Jd0aB"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# From Section:  Background\n",
+        "These comments are from the original paper:  [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf)\n",
+        "\"In these models, the number of operations required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes it more difficult to learn dependencies between distant positions. In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention.\"\n",
+        "\n",
+        "\"Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence.\"\n",
+        "\n",
+        "\"To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution.\""
+      ],
+      "metadata": {
+        "id": "FXSobPzveYTN"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# From Section:  Model Architecture\n",
+        "\"Most competitive neural sequence transduction models have an encoder-decoder structure (cite). Here, the encoder maps an input sequence of symbol representations (x_1, ..., x_n)(x \n",
+        "1\n",
+        "​\n",
+        " ,...,x \n",
+        "n\n",
+        "​\n",
+        " ) to a sequence of continuous representations \\mathbf{z} = (z_1, ..., z_n)z=(z \n",
+        "1\n",
+        "​\n",
+        " ,...,z \n",
+        "n\n",
+        "​\n",
+        " ). Given \\mathbf{z}z, the decoder then generates an output sequence (y_1,...,y_m)(y \n",
+        "1\n",
+        "​\n",
+        " ,...,y \n",
+        "m\n",
+        "​\n",
+        " ) of symbols one element at a time. At each step the model is auto-regressive (cite), consuming the previously generated symbols as additional input when generating the next.\""
+      ],
+      "metadata": {
+        "id": "Tvnz6S61fkag"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class EncoderDecoder(nn.Module):\n",
+        "    \"\"\"\n",
+        "    A standard Encoder-Decoder architecture. Base for this and many\n",
+        "    other models.\n",
+        "    \"\"\"\n",
+        "\n",
+        "    def __init__(self, encoder, decoder, src_embed, tgt_embed, generator):\n",
+        "        super(EncoderDecoder, self).__init__()\n",
+        "        self.encoder = encoder\n",
+        "        self.decoder = decoder\n",
+        "        self.src_embed = src_embed\n",
+        "        self.tgt_embed = tgt_embed\n",
+        "        self.generator = generator\n",
+        "\n",
+        "    def forward(self, src, tgt, src_mask, tgt_mask):\n",
+        "        \"Take in and process masked src and target sequences.\"\n",
+        "        return self.decode(self.encode(src, src_mask), src_mask, tgt, tgt_mask)\n",
+        "\n",
+        "    def encode(self, src, src_mask):\n",
+        "        return self.encoder(self.src_embed(src), src_mask)\n",
+        "\n",
+        "    def decode(self, memory, src_mask, tgt, tgt_mask):\n",
+        "        return self.decoder(self.tgt_embed(tgt), memory, src_mask, tgt_mask)\n",
+        "class Generator(nn.Module):\n",
+        "    \"Define standard linear + softmax generation step.\"\n",
+        "\n",
+        "    def __init__(self, d_model, vocab):\n",
+        "        super(Generator, self).__init__()\n",
+        "        # See: https://pytorch.org/docs/stable/generated/torch.nn.Linear.html\n",
+        "        self.proj = nn.Linear(d_model, vocab) \n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        return log_softmax(self.proj(x), dim=-1)"
+      ],
+      "metadata": {
+        "id": "vp--QFs1f-KR"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Generator(nn.Module):\n",
+        "    \"Define standard linear + softmax generation step.\"\n",
+        "\n",
+        "    def __init__(self, d_model, vocab):\n",
+        "        super(Generator, self).__init__()\n",
+        "        self.proj = nn.Linear(d_model, vocab)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        # See https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html\n",
+        "        return log_softmax(self.proj(x), dim=-1)"
+      ],
+      "metadata": {
+        "id": "_8-_vaaVf-9L"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        ""
+      ],
+      "metadata": {
+        "id": "9iye7OxfhC4P"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Continue with Encoder and Decoder Stacks"
+      ],
+      "metadata": {
+        "id": "fRypCCYRhkTU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        ""
+      ],
+      "metadata": {
+        "id": "v2_9gmqThv9i"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
